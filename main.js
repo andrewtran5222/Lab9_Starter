@@ -13,10 +13,7 @@ function init() {
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
-
-    // Start your code here
-    // You may move this JS to another file if you wish
-    // Part 1
+    // Step 1
     document.getElementById('consoleLog').addEventListener('click', () => {
         console.log('Hello World');
     })
@@ -75,54 +72,52 @@ function init() {
     document.getElementById('consoleTrace').addEventListener('click', () => {
         const first = () => { second(); };
         const second = () => { third(); };
-        const third = () => { fourth(); };
-        const fourth = () => { console.trace(); };
+        const third = () => { console.trace() };
         first();
     })
 
-    //Part 2
+    // Step 3
     try {
-        console.log(document.getElementById('nope').innerHTML);
-
-    } catch (err) {
-        console.error(err);
+        let doesntExist = document.querySelector("misspelledQuery");
+    } catch (e) {
+        console.error(e);
     }
 
-    //Part 3
-    class ValidationError extends Error {
+    // Step 4
+    class CustomError extends Error {
         constructor(message) {
             super(message);
-            this.name = "ValidationError"
+            this.name = "CustomError"
         }
     }
 
-    function validateAge(age) {
-        if (age < 18) {
-            throw new ValidationError("Too Young!");
-        } else if (age > 65) {
-            throw new ValidationError("Too Old!");
-        } else {
-            return age;
+    function checkPositive(num) {
+        if (num < 0) 
+        {
+            throw new CustomError("Number is not Positive");
+        }
+        else 
+        {
+            return num;
         }
     }
 
     try {
-        let ages = [20, 16, 23, 67];
-        ages.forEach((age) => {
-            console.log(validateAge(age));
-        })
-    } catch (err) {
-        if (err instanceof ValidationError) {
-            console.error("Invalid age: " + err.message);
+        console.log(checkPositive(1));
+        console.log(checkPositive(-1));
+    } catch (e) {
+        if (e instanceof CustomError)
+        {
+            throw new CustomError();
         }
     }
 
-    //Part 5
-    document.getElementById('global_error').addEventListener('click', () => {
+    // Step 5
+    document.getElementById('triggerGlobal').addEventListener('click', () => {
         try {
-            errorfunction();
-        } catch (err) {
-            console.error(err);
+            globalError();
+        } catch (e) {
+            console.error(e);
         }
     })
         
