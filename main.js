@@ -34,7 +34,7 @@ function init() {
     })
 
     document.getElementById('consoleAssert').addEventListener('click', () => {
-        console.assert(2 + 2 === 5);
+        console.assert(2 + 2 === 5, "Statement is inequivalent");
     })
 
     document.getElementById('consoleClear').addEventListener('click', () => {
